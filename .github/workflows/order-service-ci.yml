@@ -1,0 +1,30 @@
+name: order-service-ci
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'order-service/**'
+      - '.github/workflows/order-service-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'order-service/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Build & test with Maven
+        run: mvn -B clean verify
