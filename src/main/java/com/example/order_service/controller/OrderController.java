@@ -51,7 +51,6 @@ public class OrderController {
             @RequestParam(value = "status", required = false) String status
     ) {
         if (customerId != null && status != null) {
-            // если когда-нибудь понадобится комбинация
             return orderService.getOrdersByUserIdAndStatus(customerId, status);
         }
         if (customerId != null) {
@@ -60,7 +59,6 @@ public class OrderController {
         if (status != null) {
             return orderService.getOrdersByStatus(status);
         }
-        // админка: без параметров → все заказы
         return orderService.getAllOrders();
     }
 }
